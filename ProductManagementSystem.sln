@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductMangementApi", "ProductMangementApi\ProductMangementApi.csproj", "{C3B60A76-478E-43DB-B2A2-E8D9E821F06D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductManagementWebApp", "ProductManagementWebApp\ProductManagementWebApp.csproj", "{C99766B4-5565-47A6-A157-99EFC2B1510C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductManagementWebApp", "ProductManagementWebApp\ProductManagementWebApp.csproj", "{C99766B4-5565-47A6-A157-99EFC2B1510C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

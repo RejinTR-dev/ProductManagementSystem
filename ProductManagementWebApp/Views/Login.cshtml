@@ -106,9 +106,11 @@
                 },
                 success: function (response) {
                     debugger;
-                    if (response == true) {
+                    if (response.token != null && response.token!="") {
+                        localStorage.setItem('jwtToken', response.token);
                         var asb = $('#addProductUrl').val()+"?val=1";
                         window.location.href = $('#addProductUrl').val();
+                        //response.redirect($('#addProductUrl').val());
                     }
                     else {
                         alert('Login failed. Please check your username and password.');
