@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-list {
+            margin-top: 20px;
+        }
+
+        .product-item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+            .product-item:last-child {
+                border-bottom: none;
+            }
+
+            .product-item h3 {
+                margin: 0;
+            }
+
+            .product-item p {
+                margin: 5px 0;
+            }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .form-group input, .form-group textarea {
+                width: 100%;
+                padding: 8px;
+                box-sizing: border-box;
+            }
+
+            .form-group button {
+                padding: 10px 20px;
+                background-color: #28a745;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+                .form-group button:hover {
+                    background-color: #218838;
+                }
+
+        .error {
+            color: red;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Management</h1>
+        <div class="form-group">
+            <label for="productName">Name:</label>
+            <input type="text" id="productName" required>
+        </div>
+        <div class="form-group">
+            <label for="productDescription">Description:</label>
+            <textarea id="productDescription" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="productPrice">Price:</label>
+            <input type="number" id="productPrice" required>
+        </div>
+        <div class="form-group">
+            <label for="productQuantity">Quantity:</label>
+            <input type="number" id="productQuantity" required>
+        </div>
+        <div class="form-group">
+            <button id="addprdct">Add Product</button>
+            <button id="viewProducts">View Products</button>
+        </div>
+        <div class="product-list" id="productList">
+            <!-- Product items will be rendered here -->
+        </div>
+    </div>
+    <input type="hidden" id="saveProductUrl" value="@Url.Action("saveProductDetails", "Product")" />
+    <input type="hidden" id="getProductUrl" value="@Url.Action("getProductDetails", "Product")" />
+    <script>
+        $(document).ready(function () {
+            // function addProduct() {
+            $('#addprdct').click(function (e) {
+                debugger;
+                e.preventDefault();
+                e.stopImmediatePropagation();
+
+                var objProduct = {
+                    Name: $("#productName").val(), Description: $("#productDescription").val(),
+                    Price: $("#productPrice").val(), Quandity: $("#productQuantity").val()
+                };
+
+                $.ajax({
+                    url: $("#saveProductUrl").val(),
+                    type: 'POST',
+                    data: {
+                        product: objProduct
+                    },
+                    success: function (response) {
+                        debugger;
+                        alert("Product Successfully Added...")
+                        resetfieldvalue();
+
+                    },
+                    error: function (error) {
+                        // console.error('Error:', error);
+                        alert('Login failed. Please check your username and password.');
+                    }
+                });
+            });
+
+            // }
+
+            $('#viewProducts').click(function (e) {
+                debugger;
+                e.preventDefault();
+                e.stopImmediatePropagation();
+
+                $.ajax({
+                    url: $("#getProductUrl").val(),
+                    type: 'GET',
+                    success: function (response) {
+                        debugger;
+                       // resetfieldvalue();
+
+                    },
+                    error: function (error) {
+                        debugger;
+                        console.error('Error:', error);
+                        //alert('Login failed. Please check your username and password.');
+                    }
+                });
+            });
+
+
+        });
+
+        function resetfieldvalue() {
+            $("#productName").val('');
+            $("#productDescription").val('');
+            $("#productPrice").val('');
+            $("#productQuantity").val('');
+        }
+
+    </script>
+</body>
+</html>

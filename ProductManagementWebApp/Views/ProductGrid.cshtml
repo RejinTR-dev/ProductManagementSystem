@@ -1,0 +1,83 @@
+﻿@* @model  List<Product> 
+
+@{
+    ViewData["Title"] = "Product List";
+    var list = List<Product>
+} *@
+@model List<ProductManagementWebApp.Models.Product>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 18px;
+        text-align: left;
+    }
+
+        .table th, .table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+    .btn {
+        padding: 8px 12px;
+        margin-right: 5px;
+        text-decoration: none;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+    }
+</style>
+</head>
+<h2>Product List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@product.Quantity</td>
+                <td>
+                    <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@product.Id">Update</a>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@product.Id" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+       }
+    </tbody>
+</table>
+</html>
